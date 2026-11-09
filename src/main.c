@@ -44,12 +44,9 @@ I main(I argc, C **argv){
 	  break;
 	}
 
-	SDL_SetRenderDrawColor(engine.renderer, 0, 0, 0, 255);
-	SDL_RenderClear(engine.renderer);
-
+	LUV_BeginDrawing(engine, 0, 0, 0);
 	LUV_DrawImage(image, engine);
-
-	SDL_RenderPresent(engine.renderer);
+	LUV_EndDrawing(engine);
   }
 
 done:
