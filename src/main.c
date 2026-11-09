@@ -1,39 +1,35 @@
 #include <stdio.h>
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
+#include <common/common.h>
+
+#include "image.h"
+#include "engine.h"
 
 #define WIDTH 640
 #define HEIGHT 420
 
-SDL_Window *window;
-SDL_Renderer *renderer;
+LUV_Engine engine;
+LUV_Image image;
 
-int return_code = 0;
+I return_code = 0;
 
-int main(int argc, char **argv){
+I main(I argc, C **argv){
   if(argc <= 1){
 	puts("usage: luview path/to/image");
 	return_code = -1;
 	goto done;
   }
 
-  SDL_Init(SDL_INIT_VIDEO);
-
-  if (!SDL_CreateWindowAndRenderer("Luview", WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
-	SDL_Log("Failed to create window and renderer: %s\n", SDL_GetError());
-  }
-
-  SDL_Texture *img = IMG_LoadTexture(renderer, argv[1]);
-  if(img == NULL){
-	printf("Couldn't open image: %s\n", argv[1]);
+  if(!LUV_InitEngine(&engine, "luview", WIDTH, HEIGHT)){
 	return_code = -1;
 	goto done;
   }
 
-  float img_width;
-  float img_heigth;
-
-  SDL_GetTextureSize(img, &img_width, &img_heigth);
+  if(!LUV_ImageFromFile(&image, engine, argv[1])){
+	return_code = -1;
+	goto done;
+  }
 
   bool window_open = true;
   while(window_open){
@@ -48,17 +44,16 @@ int main(int argc, char **argv){
 	  break;
 	}
 
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(engine.renderer, 0, 0, 0, 255);
+	SDL_RenderClear(engine.renderer);
 
-	SDL_RenderTexture(renderer, img, &(SDL_FRect){0, 0, img_width, img_heigth}, &(SDL_FRect){0, 0, WIDTH, HEIGHT});
+	LUV_DrawImage(image, engine);
 
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(engine.renderer);
   }
 
 done:
-  SDL_DestroyWindow(window);
-  SDL_DestroyRenderer(renderer);
+  LUV_FreeImage(&image);
   printf("luview exited\n");
   return return_code;
 }

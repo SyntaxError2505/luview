@@ -1,4 +1,7 @@
 *
+!src/
 !src/**
+!include/
+!include/**
 !Makefile
 !.gitignore
