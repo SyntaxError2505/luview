@@ -26,7 +26,7 @@ I main(I argc, C **argv){
 	goto done;
   }
 
-  if(!LUV_ImageFromFile(&image, engine, argv[1])){
+  if(!LUV_ImageFromFile(&image, &engine, argv[1])){
 	return_code = -1;
 	goto done;
   }
@@ -44,9 +44,9 @@ I main(I argc, C **argv){
 	  break;
 	}
 
-	LUV_BeginDrawing(engine, 0, 0, 0);
-	LUV_DrawImage(image, engine);
-	LUV_EndDrawing(engine);
+	LUV_BeginDrawing(&engine, 0, 0, 0);
+	LUV_DrawImage(&image, &engine);
+	LUV_EndDrawing(&engine);
   }
 
 done:
