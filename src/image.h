@@ -4,6 +4,7 @@
 #include <common/common.h>
 
 #include "engine.h"
+#include "camera.h"
 
 typedef struct {
   F width, height;

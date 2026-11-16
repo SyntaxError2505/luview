@@ -5,6 +5,7 @@
 
 #include "image.h"
 #include "engine.h"
+#include "camera.h"
 
 #define WIDTH 640
 #define HEIGHT 420
