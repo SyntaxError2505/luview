@@ -14,4 +14,8 @@ typedef struct {
   F x, y, zoom;
 } LUV_Camera;
 
+void LUV_ApplyZoom(LUV_Camera *camera, SDL_FRect *rect);
+void LUV_ApplyPosition(LUV_Camera *camera, SDL_FRect *rect);
+void LUV_ApplyCamera(LUV_Camera *camera, SDL_FRect *rect);
+
 #endif

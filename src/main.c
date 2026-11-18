@@ -12,6 +12,7 @@
 
 LUV_Engine engine;
 LUV_Image image;
+LUV_Camera camera = {0, 0, 1.0};
 
 I return_code = 0;
 
@@ -46,7 +47,7 @@ I main(I argc, C **argv){
 	}
 
 	LUV_BeginDrawing(&engine, 0, 0, 0);
-	LUV_DrawImage(&image, &engine);
+	LUV_DrawImage(&image, &engine, &camera);
 	LUV_EndDrawing(&engine);
   }
 
