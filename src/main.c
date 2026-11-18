@@ -36,14 +36,14 @@ I main(I argc, C **argv){
   bool window_open = true;
   while(window_open){
 	SDL_Event event;
-	SDL_PollEvent(&event);
-
-	switch (event.type) {
-	case SDL_EVENT_QUIT:
-	  window_open = false;
-	  break;
-	default:
-	  break;
+	while(SDL_PollEvent(&event)){
+	  switch (event.type) {
+	  case SDL_EVENT_QUIT:
+	    window_open = false;
+	    break;
+	  default:
+	    break;
+	  }
 	}
 
 	LUV_BeginDrawing(&engine, 0, 0, 0);

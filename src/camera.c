@@ -15,5 +15,12 @@ void LUV_ApplyZoom(LUV_Camera *camera, SDL_FRect *rect){
   rect->y = center_y - rect->h / 2.0;
 }
 
-void LUV_ApplyPosition(LUV_Camera *camera, SDL_FRect *rect);
-void LUV_ApplyCamera(LUV_Camera *camera, SDL_FRect *rect);
+void LUV_ApplyPosition(LUV_Camera *camera, SDL_FRect *rect){
+  rect->x -= camera->x;
+  rect->y -= camera->y;
+}
+
+void LUV_ApplyCamera(LUV_Camera *camera, SDL_FRect *rect){
+  LUV_ApplyPosition(camera, rect);
+  LUV_ApplyZoom(camera, rect);
+}

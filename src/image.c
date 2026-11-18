@@ -23,7 +23,7 @@ void LUV_DrawImage(LUV_Image *image, LUV_Engine *engine, LUV_Camera *camera){
 
   SDL_FRect srcrect = {0, 0, image->width, image->height};
   SDL_FRect dstrect = {0, 0, (F)win_width, (F)win_height};
-  LUV_ApplyZoom(camera, &dstrect);
+  LUV_ApplyCamera(camera, &dstrect);
   SDL_RenderTexture(engine->renderer, image->texture, &srcrect, &dstrect);
 }
 
