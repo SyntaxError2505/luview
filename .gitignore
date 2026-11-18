@@ -5,4 +5,4 @@
 !include/**
 !Makefile
 !.gitignore
-!.README
+!README.md
